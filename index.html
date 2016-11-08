@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="House-prices-advanced-regression-techniques : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>House-prices-advanced-regression-techniques</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/meghaag0408/House-Prices-Advanced-Regression-Techniques">View on GitHub</a>
+
+          <h1 id="project_title">House-prices-advanced-regression-techniques</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/meghaag0408/House-Prices-Advanced-Regression-Techniques/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/meghaag0408/House-Prices-Advanced-Regression-Techniques/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="house-prices--advanced-regression-techniques" class="anchor" href="#house-prices--advanced-regression-techniques" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>House-Prices : Advanced Regression Techniques</h1>
+
+<p>Sold!! How do home features add up to its price tag??#KAGGLE COMPETITION</p>
+
+<h2>
+<a id="objective" class="anchor" href="#objective" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Objective:</h2>
+
+<p>With 79 explanatory variables describing (almost) every aspect of residential homes in Ames, Iowa, this competition challenges you to predict the final price of each home.
+The potential for creative feature engineering provides a rich opportunity for fun and learning using basic and combinations of regression techniques.</p>
+
+<h2>
+<a id="data-exploration-" class="anchor" href="#data-exploration-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Exploration :</h2>
+
+<ul>
+<li>The train and the test data is concatenated.</li>
+<li>NaN values are replaced with significant values.</li>
+<li>The categorical variables which have some order(e.g. Poor, good, excellent) are replaced by numeric values [0, 1, 2, …..]</li>
+<li>Yes/No in certain features are replaced by 0, 1.</li>
+</ul>
+
+<h2>
+<a id="new-feature-creation" class="anchor" href="#new-feature-creation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>New Feature Creation:</h2>
+
+<ul>
+<li>The feature extraction was quite minimal taking log transformations of numeric features and replacing missing values with the mean.</li>
+<li>It Didn't worked well - To improve it we added New features to it.</li>
+<li>Ordered categorical featured are divided into good and poor. The idea is good quality should rise price, poor quality - reduce price.</li>
+<li>Exterior1st, Exterior2nd, RoofMatl, Condition1, Condition2, BldgType are converted to price brackets using SVM.</li>
+<li>All the features are added to the original feature set, combining with different combinations of original features.</li>
+<li>The final shape of the training data set was 1459 * 460 columns. </li>
+</ul>
+
+<h2>
+<a id="scaling-features" class="anchor" href="#scaling-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scaling Features</h2>
+
+<ul>
+<li>First we have transformed the skewed numeric features(skew value is greater than 0.75) by taking log(feature + 1) - this will make the features more normal.</li>
+<li>Logarithm is applied to target value as well.</li>
+<li>Dummy variables for the categorical features are created.</li>
+<li>The insignificant features are removed, which have many zeroes.</li>
+<li>Missing values are replaced by mean whereever left.</li>
+<li>The outliers id’s are identified and dropped. </li>
+</ul>
+
+<h2>
+<a id="models" class="anchor" href="#models" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Models</h2>
+
+<p>We have used 3 different types of models :-</p>
+
+<ul>
+<li>#Linear regression with Lasso Regularization - The idea is to try Lasso a few times on bootstrapped samples and see how stable the feature selection is. As we have mostly tuned the parameters and Lasso should perform better. So giving more weight to it .</li>
+<li>#Xgboost model to our linear model to see if we can improve the score giving weight to its prediction </li>
+<li>#Elastic net Which is a regularized regression method that linearly combines the L1 and L2 penalties of the lasso and ridge methods.</li>
+</ul>
+
+<h2>
+<a id="prediction" class="anchor" href="#prediction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prediction</h2>
+
+<ul>
+<li>No single model gave efficient outputs.</li>
+<li>Have tried with combinations of different models using basic ensemble methods.</li>
+<li>Final prediction is done with giving different weights to the three models as:
+w1<em>lasso_pred + w2</em>elastic_net + w3*xgboost     where, w1+w2+w3 = 1</li>
+</ul>
+
+<h1>
+<a id="libraries-and-packages-required-" class="anchor" href="#libraries-and-packages-required-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Libraries and Packages Required :</h1>
+
+<ul>
+<li>Skitlearn <code>&gt;= 0.18</code>
+</li>
+<li>Numpy  <code>&gt;=1.11.2</code>
+</li>
+<li>Pands <code>&gt;=0.18.1</code>
+</li>
+<li>scipy <code>&gt;=0.18.1</code>
+</li>
+<li>Xgboost <code>&gt;=0.6</code>
+</li>
+<li>seaborn <code>&gt;=0.7.1</code>
+</li>
+<li>More imports are :- itertools , operator</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">House-prices-advanced-regression-techniques maintained by <a href="https://github.com/meghaag0408">meghaag0408</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
